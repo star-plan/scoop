@@ -1,0 +1,38 @@
+name: Sync manifests
+
+on:
+  schedule:
+    # Every 4 hours
+    - cron: "20 */4 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [app-release]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync bucket manifests from latest releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x scripts/sync-manifests.sh
+          ./scripts/sync-manifests.sh
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add bucket/*.json
+          if git diff --staged --quiet; then
+            echo "No manifest changes"
+            exit 0
+          fi
+          git commit -m "chore: sync scoop manifests from latest releases"
+          git push
