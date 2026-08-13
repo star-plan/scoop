@@ -1,13 +1,13 @@
 {
-    "version": "0.5.4",
+    "version": "0.5.6",
     "description": "Local code archive importer/exporter (git bundle + zip)",
     "homepage": "https://github.com/star-plan/code-porter",
     "license": "Apache-2.0",
     "depends": "git",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/star-plan/code-porter/releases/download/v0.5.4/code-porter-windows-amd64.exe#/code-porter.exe",
-            "hash": "edf5ed6a6d701142e7fca587ce4cfe544942458e5611958cb542c93d06f18919"
+            "url": "https://github.com/star-plan/code-porter/releases/download/v0.5.6/code-porter-windows-amd64.exe#/code-porter.exe",
+            "hash": "1abe15d463623d8d56d1a7fd2a02d2f18fa3ed604181a56ca6a25476f1a2984d"
         }
     },
     "bin": "code-porter.exe",
